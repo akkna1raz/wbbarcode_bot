@@ -1,0 +1,10 @@
+{
+  "name": "wb-barcode-scanner",
+  "version": "2.0.0",
+  "type": "module",
+  "dependencies": {
+    "ioredis": "^5.3.2",
+    "https-proxy-agent": "^7.0.2",
+    "node-fetch": "^3.3.2"
+  }
+}

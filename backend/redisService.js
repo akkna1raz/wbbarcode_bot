@@ -38,7 +38,7 @@ if (CONFIG.REDIS_URL && isValidRedisUrl(CONFIG.REDIS_URL)) {
 export async function getStaticCache(barcode) {
   if (!redisClient) return null;
   try {
-    const data = await redisClient.get(`static:${barcode}`);
+    const data = await redisClient.get(`v2:static:${barcode}`);
     return data ? JSON.parse(data) : null;
   } catch (e) {
     return null;
@@ -48,14 +48,14 @@ export async function getStaticCache(barcode) {
 export async function setStaticCache(barcode, data) {
   if (!redisClient) return;
   try {
-    await redisClient.setex(`static:${barcode}`, CONFIG.CACHE_STATIC_TTL, JSON.stringify(data));
+    await redisClient.setex(`v2:static:${barcode}`, CONFIG.CACHE_STATIC_TTL, JSON.stringify(data));
   } catch (e) {}
 }
 
 export async function getDynamicCache(article) {
   if (!redisClient) return null;
   try {
-    const data = await redisClient.get(`dynamic:${article}`);
+    const data = await redisClient.get(`v2:dynamic:${article}`);
     return data ? JSON.parse(data) : null;
   } catch (e) {
     return null;
@@ -65,14 +65,14 @@ export async function getDynamicCache(article) {
 export async function setDynamicCache(article, data) {
   if (!redisClient) return;
   try {
-    await redisClient.setex(`dynamic:${article}`, CONFIG.CACHE_DYNAMIC_TTL, JSON.stringify(data));
+    await redisClient.setex(`v2:dynamic:${article}`, CONFIG.CACHE_DYNAMIC_TTL, JSON.stringify(data));
   } catch (e) {}
 }
 
 export async function getNegativeCache(barcode) {
   if (!redisClient) return null;
   try {
-    const data = await redisClient.get(`negative:${barcode}`);
+    const data = await redisClient.get(`v2:negative:${barcode}`);
     return data ? JSON.parse(data) : null;
   } catch (e) {
     return null;
@@ -82,14 +82,14 @@ export async function getNegativeCache(barcode) {
 export async function setNegativeCache(barcode, data) {
   if (!redisClient) return;
   try {
-    await redisClient.setex(`negative:${barcode}`, CONFIG.CACHE_NEGATIVE_TTL, JSON.stringify(data));
+    await redisClient.setex(`v2:negative:${barcode}`, CONFIG.CACHE_NEGATIVE_TTL, JSON.stringify(data));
   } catch (e) {}
 }
 
 export async function acquireLock(key, ttlSec) {
   if (!redisClient) return true;
   try {
-    const result = await redisClient.set(`lock:${key}`, '1', 'EX', ttlSec, 'NX');
+    const result = await redisClient.set(`v2:lock:${key}`, '1', 'EX', ttlSec, 'NX');
     return result === 'OK';
   } catch (e) {
     return true;
@@ -99,6 +99,6 @@ export async function acquireLock(key, ttlSec) {
 export async function releaseLock(key) {
   if (!redisClient) return;
   try {
-    await redisClient.del(`lock:${key}`);
+    await redisClient.del(`v2:lock:${key}`);
   } catch (e) {}
 }

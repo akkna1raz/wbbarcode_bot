@@ -346,7 +346,7 @@ export async function findBestWbOffer(sourceProduct, barcode) {
 
 export async function getWbPriceByArticle(article) {
   const endpoints = [
-    `https://card.wb.ru/cards/v2/detail?appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&spp=30&nm=${article}`,
+    `https://card.wb.ru/cards/v2/detail?appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&nm=${article}`,
     `https://card.wb.ru/cards/v1/detail?appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&nm=${article}`
   ];
 
@@ -419,9 +419,9 @@ async function executeWbSearch(query) {
   const cleanQuery = query.replace(/[^\w\sа-яА-ЯёЁ]/gi, ' ').replace(/\s+/g, ' ').trim();
   const encodedQuery = encodeURIComponent(cleanQuery || query);
   const endpoints = [
-    `https://search.wb.ru/exactmatch/ru/common/v18/search?ab_testing=false&appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&lang=ru&page=1&query=${encodedQuery}&resultset=catalog&sort=popular&spp=30&suppressSpellcheck=false`,
-    `https://u-search.wb.ru/exactmatch/ru/common/v18/search?ab_testing=false&appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&lang=ru&page=1&query=${encodedQuery}&resultset=catalog&sort=popular&spp=30&suppressSpellcheck=false`,
-    `https://search.wb.ru/exactmatch/ru/common/v13/search?ab_testing=false&appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&hide_dtype=13&lang=ru&page=1&query=${encodedQuery}&resultset=catalog&sort=popular&spp=30&suppressSpellcheck=false`,
+    `https://search.wb.ru/exactmatch/ru/common/v18/search?ab_testing=false&appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&lang=ru&page=1&query=${encodedQuery}&resultset=catalog&sort=popular&suppressSpellcheck=false`,
+    `https://u-search.wb.ru/exactmatch/ru/common/v18/search?ab_testing=false&appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&lang=ru&page=1&query=${encodedQuery}&resultset=catalog&sort=popular&suppressSpellcheck=false`,
+    `https://search.wb.ru/exactmatch/ru/common/v13/search?ab_testing=false&appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&hide_dtype=13&lang=ru&page=1&query=${encodedQuery}&resultset=catalog&sort=popular&suppressSpellcheck=false`,
     `https://search.wb.ru/exactmatch/ru/common/v4/search?appType=1&curr=rub&dest=${CONFIG.WB_GEO_DEST}&page=1&query=${encodedQuery}&resultset=catalog&sort=popular&suppressSpellcheck=false`
   ];
 

@@ -228,7 +228,7 @@ function renderResult(data) {
   el.resBrand.textContent = wb.brand || src.brand || 'Бренд';
   el.resArticle.textContent = wb.article ? `Артикул WB: ${wb.article}` : '';
 
-  const photoUrl = wb.image || wb.fallbackImage || src.image;
+  const photoUrl = wb.image || src.image;
   if (photoUrl) {
     el.resImage.src = photoUrl;
     el.resImage.onerror = () => {

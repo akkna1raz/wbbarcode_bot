@@ -1,5 +1,5 @@
 export function validateEAN(barcode) {
-  if (!/^\d{8}$|^\d{13}$|^\d{14}$/.test(barcode)) return false;
+  if (!/^\d{8}|^\d{12}|^\d{13}|^\d{14}/.test(barcode)) return false;
   const digits = barcode.split('').map(Number);
   const checkDigit = digits.pop();
   const multiplier = digits.length % 2 === 0 ? [1, 3] : [3, 1];
